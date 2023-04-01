@@ -19,7 +19,7 @@ const char* ENABLE_CURSOR = "\e[?25h";
 
 struct termios original_termios;
 void catch_int() {
-    tcsetattr(fileno(stdin), TCSANOW, &original_termios); // this could be uninit
+    tcsetattr(fileno(stdin), TCSANOW, &original_termios);
     fputs(DISABLE_ALT_SCREEN, stdout);
     fputs(ENABLE_CURSOR, stdout);
     exit(0);
@@ -137,5 +137,5 @@ void w4_terminalComposite (const uint32_t* palette, const uint8_t* framebuffer) 
     long seconds = end.tv_sec - start.tv_sec;
     long nanoseconds = end.tv_nsec = start.tv_sec;
     double milliseconds = seconds/1000 + nanoseconds*1e-6;
-    printf("\e[0m%.5fms\n", milliseconds);
+    // printf("\e[0m%.5fms\n", milliseconds);
 }
