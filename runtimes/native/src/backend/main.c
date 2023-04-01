@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include <cubeb/cubeb.h>
 
@@ -9,6 +10,7 @@
 #include "../wasm.h"
 #include "../window.h"
 #include "../util.h"
+#include "../terminal.h"
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -199,6 +201,10 @@ int main (int argc, const char* argv[]) {
         trimFileExtension(diskPath); // Trim .wasm
         strcat(diskPath, DISK_FILE_EXT);
         loadDiskFile(&disk, diskPath);
+
+        if (argc >= 3) {
+            TERMINAL = true;
+        }
     }
 
     audioInit();
@@ -208,7 +214,11 @@ int main (int argc, const char* argv[]) {
 
     w4_wasmLoadModule(cartBytes, cartLength);
 
-    w4_windowBoot(title);
+    if (TERMINAL) {
+        w4_terminalBoot(title);
+    } else {
+        w4_windowBoot(title);
+    }
 
     audioUninit();
 

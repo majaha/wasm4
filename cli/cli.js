@@ -139,6 +139,13 @@ program.command("run-native <cart>")
         runNative.run(cart, opts);
     });
 
+program.command("run-terminal <cart>")
+    .description("Open a cartridge in this terminal")
+    .action((cart, opts) => {
+        const runNative = require("./lib/run-terminal");
+        runNative.run(cart, opts);
+    });
+
 program.command("png2src <images...>")
     .description("Convert images to source code")
     .option("--as, --assemblyscript", "Generate AssemblyScript source (Shorthand for --lang assemblyscript)")

@@ -70,6 +70,7 @@ set(MINIFB_SOURCES
     src/backend/main.c
     src/backend/wasm_wasm3.c
     src/backend/window_minifb.c
+    src/backend/terminal.c
 )
 add_executable(wasm4 ${COMMON_SOURCES} ${MINIFB_SOURCES} ${M3_SOURCES})
 

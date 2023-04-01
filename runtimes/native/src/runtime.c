@@ -8,6 +8,7 @@
 #include "util.h"
 #include "wasm.h"
 #include "window.h"
+#include "terminal.h"
 
 #define WIDTH 160
 #define HEIGHT 160
@@ -190,7 +191,11 @@ void w4_runtimeUpdate () {
         w4_read32LE(&memory->palette[2]),
         w4_read32LE(&memory->palette[3]),
     };
-    w4_windowComposite(palette, memory->framebuffer);
+    if (TERMINAL) {
+        w4_terminalComposite(palette, memory->framebuffer);
+    } else {
+        w4_windowComposite(palette, memory->framebuffer);
+    }
 }
 
 int w4_runtimeSerializeSize () {
